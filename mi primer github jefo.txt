@@ -1,1 +1,230 @@
-system.32
+// PROYECTO "FRUTERIA" Jesus Enrique Flores Orozco
+// Carlos Fernando Chacon Hernandez
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+// lista de variables
+void venta(int *fresas, int *naranjas, int *mangos, int *platanos, int *guayabas, float *dinero);
+void compra(int *fresas, int *naranjas, int *mangos, int *platanos, int *guayabas, float *dinero);
+void saldo(int fresas, int naranjas, int mangos, int platanos, int guayabas, float dinero);
+void salir();
+
+
+int main() {
+
+	// definir variables
+	int fresas= 25;
+	int naranjas= 25;
+	int mangos= 25;
+	int platanos= 25;
+	int guayabas= 25;
+	float dinero = 1000.00;
+	int opcion, cantidad;
+	char fruta;
+	
+    // logo
+ 	printf("$$$$$$$   $$$$$$    $$$   $$$  $$$$$$$$  $$$$$$$   $$$$$$    $$$$$$     $$$$\n");
+    printf("$$        $$   $$   $$$   $$$     $$     $$        $$   $$     $$      $$  $$\n");
+    printf("$$$$$     $$$$$$    $$$   $$$     $$     $$$$$     $$$$$$      $$     $$$$$$$$\n");
+    printf("$$        $$   $$   $$$   $$$     $$     $$        $$   $$     $$     $$    $$\n");
+    printf("$$        $$   $$    $$$$$$$      $$     $$$$$$$   $$   $$   $$$$$$   $$    $$\n");
+    printf("  \n");
+	printf("  \n");
+    printf("___________$$$$$$$$$$$$$$$______________\n");
+    printf("________$$$$______$$$$$$$$______________\n");
+    printf("______$$$_____$$$$$$_$$_$$______________\n");
+    printf("_____$____$$$$$$$$$__$__$$______________\n");
+    printf("___$$___$$$$$$$$$___$___$$______________\n");
+    printf("__$$__$$$$$$$$$$___$____$$______________\n");
+    printf("__$$$$$$$$$$$_____$$_____$$____$$$$$$___\n");
+    printf("$$$$$$$__________$$_______$$_$$$$$$$$$$_\n");
+    printf("_________$$$$$__$$$____$$__$__$$$$$$$$$_\n");
+    printf("______$$$$$$$$$_$$$$$$$$$$$$$$$$$$$$$$$$\n");
+    printf("_____$$$$$$$$$$$$__$$$$$__$$$$$$$$$$$$$$\n");
+    printf("____$$$__$$$$$$$$$$$$$$$$__$$$$$$$$$__$$\n");
+    printf("____$$___$$$$$$$$$$$$$$$$$_$$$$$$$$$__$$\n");
+    printf("____$$__$$$$$$$$$$$$$$$$$$_$$$$$$$$$_$$_\n");
+    printf("____$$$_$$$$$$$$$$$$$$$$$$_$$$$$$$$$$$__\n");
+    printf("____$$$__$$$$$$$$$$$$$$$$_$$$$$$$$$$$___\n");
+    printf("_____$$$$$$$$$$$$$$$$$$$__$$$$$$$$$_____\n");
+    printf("_____$$$$$$$$$$$$$$$$$$$________________\n");
+    printf("_______$$$$$$$$$$$$$$$__________________\n");
+    printf("__________$$$$$$$$$$____________________\n");
+    printf("  \n");
+	system("pause");
+	system("cls");
+
+	printf("\nsaldo actual: $%.2f\n", dinero);
+	printf("existencia de frutas:\n");
+	printf("fresas: %d\n", fresas);
+	printf("naranjas: %d\n", naranjas);
+	printf("mangos: %d\n", mangos);
+	printf("platanos: %d\n", platanos);
+	printf("guayabas: %d\n", guayabas);
+	system("pause");
+	system("cls");
+
+	// menu principal
+	while(1){
+
+		printf("presiona el numero de lo que quieres hacer\n");
+		printf("1. venta de producto\n");
+		printf("2. compra de producto\n");
+        printf("3. saldo actual\n");
+        printf("4. salir\n");
+		printf("opcion: ");
+		scanf("%d", &opcion);
+		system("pause");
+        system("cls");
+
+	    switch (opcion){
+
+	        case 1:
+	            venta(&fresas, &naranjas, &mangos, &platanos, &guayabas, &dinero);
+	            break;
+
+	        case 2:
+	            compra(&fresas, &naranjas, &mangos, &platanos, &guayabas, &dinero);
+	            break;
+
+	        case 3:
+	            saldo(fresas, naranjas, mangos, platanos, guayabas, dinero);
+	            break;
+
+	        case 4:
+	            salir();
+	            return 0;
+
+	        default:
+	            printf("ese numero no es posible\n");
+	            system("pause");
+	            system("cls");
+	            break;
+	    }
+	}
+}
+
+
+
+
+// formulas para compra y venta
+
+// Precio de venta = $2
+// Precio de compra = $1
+
+void venta(int *fresas, int *naranjas, int *mangos, int *platanos, int *guayabas, float *dinero){
+
+    int fruta, cantidad;
+    printf("Que fruta deseas vender?\n");
+    printf("1. Fresas\n2. Naranjas\n3. Mangos\n4. Platanos\n5. Guayabas\n");
+    printf("Opcion: ");
+    scanf("%d", &fruta);
+
+    printf("Cantidad a vender: ");
+    scanf("%d", &cantidad);
+
+    if (cantidad <= 0){
+        printf("Cantidad invalida.\n");
+        system("pause");
+        return;
+    }
+
+    int *inv;
+
+    switch(fruta){
+        case 1: inv = fresas; break;
+        case 2: inv = naranjas; break;
+        case 3: inv = mangos; break;
+        case 4: inv = platanos; break;
+        case 5: inv = guayabas; break;
+        default:
+            printf("Opcion invalida.\n");
+            system("pause");
+            return;
+    }
+
+    if (*inv < cantidad){
+        printf("No tienes suficiente inventario.\n");
+        system("pause");
+        return;
+    }
+
+    *inv -= cantidad;
+    *dinero += cantidad * 2;
+
+    printf("Venta realizada. Ganaste $%d\n", cantidad * 2);
+    system("pause");
+    system("cls");
+}
+
+
+void compra(int *fresas, int *naranjas, int *mangos, int *platanos, int *guayabas, float *dinero){
+
+    int fruta, cantidad;
+    printf("Que fruta deseas comprar?\n");
+    printf("1. Fresas\n2. Naranjas\n3. Mangos\n4. Platanos\n5. Guayabas\n");
+    printf("Opcion: ");
+    scanf("%d", &fruta);
+
+    printf("Cantidad a comprar: ");
+    scanf("%d", &cantidad);
+
+    if (cantidad <= 0){
+        printf("Cantidad invÃ¡lida.\n");
+        system("pause");
+        return;
+    }
+
+    float costo = cantidad * 1;
+
+    if (*dinero < costo){
+        printf("No tienes suficiente dinero.\n");
+        system("pause");
+        return;
+    }
+
+    int *inv;
+
+    switch(fruta){
+        case 1: inv = fresas; break;
+        case 2: inv = naranjas; break;
+        case 3: inv = mangos; break;
+        case 4: inv = platanos; break;
+        case 5: inv = guayabas; break;
+        default:
+            printf("Opcion invalida.\n");
+            system("pause");
+            return;
+    }
+
+    *inv += cantidad;
+    *dinero -= costo;
+
+    printf("Compra realizada. Gastaste $%.2f\n", costo);
+    system("pause");
+    system("cls");
+}
+
+
+
+void saldo(int fresas, int naranjas, int mangos, int platanos, int guayabas, float dinero){
+
+    printf("------ SALDO ACTUAL ------\n");
+    printf("Dinero: $%.2f\n\n", dinero);
+
+    printf("Fresas: %d\n", fresas);
+    printf("Naranjas: %d\n", naranjas);
+    printf("Mangos: %d\n", mangos);
+    printf("Platanos: %d\n", platanos);
+    printf("Guayabas: %d\n", guayabas);
+
+    printf("\n");
+    system("pause");
+    system("cls");
+}
+
+void salir(){
+    printf("estas a punto de salir de la tiendita...\nadiooos!!\n");
+    system("pause");
+}
